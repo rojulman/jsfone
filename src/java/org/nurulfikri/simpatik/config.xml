@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+<configuration>
+    
+    <typeAliases>
+        <typeAlias alias="Propinsi" 
+                   type="org.nurulfikri.simpatik.models.Propinsi"/> 
+    </typeAliases>
+ 
+    <environments default="development">
+        <environment id="development">
+          <transactionManager type="JDBC"/>
+            <!--  connecting to Local MySql -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/dbsimpatik"/>
+                <property name="username" value="siswa"/>
+                <property name="password" value="siswa123"/>
+            </dataSource>
+       </environment>
+    </environments>
+    
+    <mappers>
+       <mapper resource="org/nurulfikri/simpatik/mappers/PropinsiMapper.xml"/>
+    </mappers>
+    
+</configuration>
