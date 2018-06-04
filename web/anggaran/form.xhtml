@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Brand" brandHref="#" id="dropMenuExample" contentDisabled="#{navBarBean.navBarDisabled}">
+  <b:navbarLinks contentDisabled="#{navBarBean.navBarLinksDisabled}">
+    <b:navLink value="Home" href="#"></b:navLink>
+    <b:navLink value="Link" href="#"></b:navLink>
+    <b:navLink value="Link" href="#"></b:navLink>
+    <b:dropMenu value="Dropdown" contentDisabled="#{navBarBean.dropMenuDisabled}">
+      <b:navLink value="Action" href="#"></b:navLink>
+      <b:navLink value="Another action" href="#"></b:navLink>
+      <b:navLink value="Something else here" href="#"></b:navLink>
+      <b:navLink></b:navLink>
+      <b:navLink header="Nav header"></b:navLink>
+      <b:navLink value="Separated link" href="#"></b:navLink>
+      <b:navLink value="One more separated link" href="#"></b:navLink>
+    </b:dropMenu>
+  </b:navbarLinks>
+</b:navBar>
+        
+        
+
+        <h2>Form Entry Mata Anggaran</h2>
+
+        <b:form inline="true">
+            <h:panelGrid columns="1" cellpadding="5">
+                <b:inputText label="Mata Anggaran:" 
+                             value="#{anggaran.mataAnggaran.nama}"
+                             labelStyle="width:80px;">
+                </b:inputText>
+                <b:inputText label="Maksimal:" 
+                             value="#{anggaran.mataAnggaran.maksimal}"
+                             labelStyle="width:80px;">
+                    <f:facet name="prepend">
+                        <h:outputText value="Rp" />
+                    </f:facet>
+                    <f:facet name="append">
+                        <h:outputText value=".00" />
+                    </f:facet>
+                </b:inputText>
+                <!--
+                <b:inputText label="Kategori ID:" 
+                             value="#{anggaran.mataAnggaran.kategoriId}"
+                             labelStyle="width:80px;">
+                </b:inputText>
+                -->
+                <b:selectOneMenu
+                    label="Kategori Belanja"
+                    value="#{anggaran.mataAnggaran.kategoriId}">
+                    <f:selectItems
+                        value="#{anggaran.listKategori}"
+                        var="item"
+                        itemLabel="#{item.nama}"
+                        itemValue="#{item.id}"/>
+                    
+                </b:selectOneMenu>
+                    
+                
+                
+            </h:panelGrid>
+            <b:commandButton value="Simpan" 
+                      look="success"
+                      action="#{anggaran.simpan()}"/>
+        </b:form>
+
+
+    </h:body>
+</html>
