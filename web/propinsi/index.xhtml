@@ -8,21 +8,45 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
         <div>Daftar Propinsi</div>
-        <h:form>
-            <b:dataTable value="#{propinsiController.findAll()}"
-                         var="prop">
-                <b:dataTableColumn value="#{prop.id}" />
-                <b:dataTableColumn value="#{prop.kode}" />
-                <b:dataTableColumn value="#{prop.nama}" /></b:dataTable>
-        </h:form> 
-
+        <ui:composition template="../layout/template2.xhtml">
+            <ui:define name="isi">
+                <h:form>
+                    <b:commandButton value="Add New Propinsi"
+                                     look="danger"
+                                     action="form"/>
+                    <b:dataTable value="#{propinsiController.findAll()}"
+                                 var="prop"
+                                 excel="true"
+                                 csv="true"
+                                 pdf="true"
+                                 columnVisibility="true"
+                                 copy="true"
+                                 print="true"
+                                 >
+                        <b:dataTableColumn value="#{prop.id}" />
+                        <b:dataTableColumn value="#{prop.kode}" />
+                        <b:dataTableColumn value="#{prop.nama}" />
+                        <b:dataTableColumn label="action">
+                            <h:commandLink 
+                                action="#{propinsiController.editPropinsi(prop)}">
+                                <b:icon name="edit"/>
+                            </h:commandLink>
+                            <h:commandLink>
+                                <b:icon name="trash"/>
+                            </h:commandLink>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </h:form> 
+            </ui:define>
+        </ui:composition>
 
     </h:body>
 </html>

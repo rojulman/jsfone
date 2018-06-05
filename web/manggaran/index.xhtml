@@ -8,35 +8,48 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
         <div>Daftar Mata Anggaran</div>
+        <ui:composition template="../layout/template2.xhtml">
+            <ui:define name="isi">
+                <h:form>
+                    <b:commandButton value="Add New Propinsi"
+                                     look="danger"
+                                     action="form"/>
+                    <b:dataTable value="#{manggaran.findAll()}"
+                                 var="obj">
+                        <b:dataTableColumn 
+                            label="ID"
+                            value="#{obj.id}" />
+                        <b:dataTableColumn 
+                            label="Mata Anggaran"
+                            value="#{obj.nama}" />
+                        <b:dataTableColumn 
+                            label="Pagu Maksimal">
+                            <h:outputText 
+                                style="float:right"
+                                value="#{obj.maksimalFormat}" />
+                        </b:dataTableColumn>
+                            
+                        <b:dataTableColumn label="action">
+                            <h:commandLink 
+                                action="index">
+                                <b:icon name="edit"/>
+                            </h:commandLink>
+                            <h:commandLink>
+                                <b:icon name="trash"/>
+                            </h:commandLink>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </h:form> 
 
-        <h:form>
-            <b:commandButton value="Add New Propinsi"
-                             look="danger"
-                             action="form"/>
-            <b:dataTable value="#{manggaran.findAll()}"
-                         var="obj">
-                <b:dataTableColumn value="#{obj.id}" />
-                <b:dataTableColumn value="#{obj.nama}" />
-                <b:dataTableColumn value="#{obj.maksimalFormat}" />
-                <b:dataTableColumn label="action">
-                    <h:commandLink 
-                        action="index">
-                        <b:icon name="edit"/>
-                    </h:commandLink>
-                    <h:commandLink>
-                        <b:icon name="trash"/>
-                    </h:commandLink>
-                </b:dataTableColumn>
-            </b:dataTable>
-        </h:form> 
-
-
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>

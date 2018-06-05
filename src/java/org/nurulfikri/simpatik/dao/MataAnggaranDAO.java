@@ -65,4 +65,10 @@ public class MataAnggaranDAO implements IDAO<MataAnggaran> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public MataAnggaran createNew() {
+        return new MataAnggaran();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

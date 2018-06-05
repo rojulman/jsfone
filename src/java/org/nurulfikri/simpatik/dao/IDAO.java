@@ -17,5 +17,6 @@ public interface IDAO <E> {
     public E save(E obj);
     public E update(E obj);
     public void delete(int id);
+    public E createNew();
     
 }

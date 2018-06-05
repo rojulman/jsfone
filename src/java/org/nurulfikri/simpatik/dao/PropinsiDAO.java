@@ -14,7 +14,7 @@ import org.nurulfikri.simpatik.models.Propinsi;
  *
  * @author rojul
  */
-public class PropinsiDAO implements IDAO <Propinsi>{
+public class PropinsiDAO implements IDAO<Propinsi> {
 
     // dua class untuk eksekusi sql pada mapper
     private SqlSessionFactory sqlSessionFactory;
@@ -28,9 +28,9 @@ public class PropinsiDAO implements IDAO <Propinsi>{
     public List<Propinsi> getAll() {
         List<Propinsi> list = null;
         session = sqlSessionFactory.openSession();
-        try{
+        try {
             list = session.selectList("PropinsiMapper.selectPropinsi");
-        }finally{
+        } finally {
             session.close();
         }
         return list;
@@ -38,22 +38,44 @@ public class PropinsiDAO implements IDAO <Propinsi>{
 
     @Override
     public Propinsi findByID(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session = sqlSessionFactory.openSession();
+        Propinsi obj = 
+           session.selectOne("PropinsiMapper.findById", id);
+        session.commit();
+        session.close();
+        return obj;
+
     }
 
     @Override
     public Propinsi save(Propinsi obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session = sqlSessionFactory.openSession();
+        session.insert("PropinsiMapper.insertPropinsi", obj);
+        session.commit();
+        session.close();
+        return obj;
     }
 
     @Override
     public Propinsi update(Propinsi obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session = sqlSessionFactory.openSession();
+        session.update("PropinsiMapper.updatePropinsi", obj);
+        session.commit();
+        session.close();
+        return obj;
     }
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session = sqlSessionFactory.openSession();
+        session.delete("PropinsiMapper.deletePropinsi", id);
+        session.commit();
+        session.close();
     }
-    
+
+    @Override
+    public Propinsi createNew() {
+        return new Propinsi();
+    }
+
 }

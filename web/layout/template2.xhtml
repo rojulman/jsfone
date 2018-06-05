@@ -14,14 +14,17 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+
 <base href="#{request.requestURL.substring(0, 
               request.requestURL.length() - 
-              request.requestURI.length())}#{request.contextPath}/" />
+          request.requestURI.length())}#{request.contextPath}/" />
         
         <b:navBar brand="Simpatik" brandHref="#" fluid="true">
             <b:navbarLinks>
                 <b:navLink value="Anggaran" href="anggaran/form.jsf"></b:navLink>
-                <b:navLink value="Link" href="#"></b:navLink>
+                <b:navLink value="Propinsi" href="propinsi/index.jsf"></b:navLink>
+                 <b:navLink value="Mata Anggaran" href="manggaran/index.jsf"></b:navLink>
+               
                 <b:dropMenu value="Dropdown" iconAwesome="birthday-cake">
                     <b:navLink value="Action" href="#"></b:navLink>
                     <b:navLink value="Another action" href="#"></b:navLink>
