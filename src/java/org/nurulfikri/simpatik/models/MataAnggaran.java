@@ -59,5 +59,9 @@ public class MataAnggaran implements Serializable{
         return "MataAnggaran{" + "id=" + id + ", nama=" + nama + ", maksimal=" + maksimal + '}';
     }
 
+    public String getMaksimalFormat(){
+        String str = SimpatikUtils.formatUang(this.maksimal);
+        return str;
+    }
     
 }
