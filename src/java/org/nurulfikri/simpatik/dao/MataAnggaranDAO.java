@@ -8,6 +8,7 @@ package org.nurulfikri.simpatik.dao;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.nurulfikri.simpatik.models.KategoriBelanja;
 import org.nurulfikri.simpatik.models.MataAnggaran;
 import org.nurulfikri.simpatik.models.Propinsi;
 
@@ -36,6 +37,21 @@ public class MataAnggaranDAO implements IDAO<MataAnggaran> {
         }
         return list;
     }
+    
+    public List<KategoriBelanja> getAllKategori() {
+        List<KategoriBelanja> list = null;
+        session = sqlSessionFactory.openSession();
+        try {
+            list = session.selectList("MataAnggaranMapper.selectAllKategori");
+        } finally {
+            session.close();
+        }
+        return list;
+    }
+    
+    
+    
+    
 
     @Override
     public MataAnggaran findByID(int id) {
@@ -62,7 +78,11 @@ public class MataAnggaranDAO implements IDAO<MataAnggaran> {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session = sqlSessionFactory.openSession();
+        session.delete("MataAnggaranMapper.deleteMataAnggaran", id);
+        session.commit();
+        session.close();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

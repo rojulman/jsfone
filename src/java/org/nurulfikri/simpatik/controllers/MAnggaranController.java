@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import org.nurulfikri.simpatik.MyBatisConnectionFactory;
 import org.nurulfikri.simpatik.dao.MataAnggaranDAO;
 import org.nurulfikri.simpatik.dao.PropinsiDAO;
+import org.nurulfikri.simpatik.models.KategoriBelanja;
 import org.nurulfikri.simpatik.models.MataAnggaran;
 import org.nurulfikri.simpatik.models.Propinsi;
 
@@ -23,24 +24,54 @@ import org.nurulfikri.simpatik.models.Propinsi;
 @SessionScoped
 public class MAnggaranController implements Serializable{
     private MataAnggaranDAO mataAnggaranDAO = null;
-    private MataAnggaran mAnggaran;
+    private MataAnggaran mataAnggaran;
 
     public MAnggaranController() {
         mataAnggaranDAO = new MataAnggaranDAO(
                 MyBatisConnectionFactory.getSqlSessionFactory());
-        mAnggaran = new MataAnggaran();
+        mataAnggaran = new MataAnggaran();
     }
 
-    public MataAnggaran getmAnggaran() {
-        return mAnggaran;
+    public MataAnggaran getMataAnggaran() {
+        return mataAnggaran;
     }
 
-    public void setmAnggaran(MataAnggaran mAnggaran) {
-        this.mAnggaran = mAnggaran;
+    public void setMataAnggaran(MataAnggaran mataAnggaran) {
+        this.mataAnggaran = mataAnggaran;
     }
+
     
     public List<MataAnggaran> findAll() {
         return mataAnggaranDAO.getAll();
+    }
+    
+    public List<KategoriBelanja> getAllKategori(){
+        return mataAnggaranDAO.getAllKategori();
+    }
+    
+    
+    public String simpan(){
+        if(this.mataAnggaran.getId() > 0){
+            this.mataAnggaran=mataAnggaranDAO.update(mataAnggaran);
+        }else{
+            this.mataAnggaran = mataAnggaranDAO.save(this.mataAnggaran);
+        }
+        return "index";
+    }
+    
+    public String editMataAnggaran(MataAnggaran mata){
+        this.mataAnggaran = mata;
+        return "form";
+    }
+    
+    public String addMataAnggaran(){
+        this.mataAnggaran = mataAnggaranDAO.createNew();
+        return "form";
+    }
+    
+    public String deleteMataAnggaran(int id){
+        mataAnggaranDAO.delete(id);
+        return "index";
     }
     
 }

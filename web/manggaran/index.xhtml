@@ -19,17 +19,32 @@ and open the template in the editor.
         <ui:composition template="../layout/template2.xhtml">
             <ui:define name="isi">
                 <h:form>
-                    <b:commandButton value="Add New Propinsi"
+                    <b:commandButton value="Add New MataAnggaran"
                                      look="danger"
-                                     action="form"/>
+                                     action="#{manggaran.addMataAnggaran()}"/>
                     <b:dataTable value="#{manggaran.findAll()}"
-                                 var="obj">
+                                 var="obj"
+                                 excel="true"
+                                 csv="true"
+                                 pdf="true"
+                                 columnVisibility="true"
+                                 copy="true"
+                                 print="true"
+                                 
+                                 
+                                 >
                         <b:dataTableColumn 
                             label="ID"
                             value="#{obj.id}" />
                         <b:dataTableColumn 
                             label="Mata Anggaran"
                             value="#{obj.nama}" />
+                        <b:dataTableColumn 
+                            label="Kategori Belanja"
+                            value="#{obj.kategoriBelanja.nama}" />
+                        
+                        
+                        
                         <b:dataTableColumn 
                             label="Pagu Maksimal">
                             <h:outputText 
@@ -39,10 +54,11 @@ and open the template in the editor.
                             
                         <b:dataTableColumn label="action">
                             <h:commandLink 
-                                action="index">
+                                action="#{manggaran.editMataAnggaran(obj)}">
                                 <b:icon name="edit"/>
                             </h:commandLink>
-                            <h:commandLink>
+                            <h:commandLink
+                                action="#{manggaran.deleteMataAnggaran(obj.id)}">
                                 <b:icon name="trash"/>
                             </h:commandLink>
                         </b:dataTableColumn>
