@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="MataAnggaranMapper">
+  
+    <resultMap id="result" type="MataAnggaran">
+        <id property="id" column="id"/>
+        <result property="nama" column="nama"/>
+        <result property="maksimal" column="maksimal"/>
+        <result property="kategoriId" 
+                column="kategori_belanja_id"/>
+        <association property="kategoriBelanja"
+                     column="kategori_belanja_id"
+                     javaType="KategoriBelanja"
+                     select="selectKategori"/>
+    </resultMap>
+    
+    <resultMap id="resultKategori" type="KategoriBelanja">
+        <id property="id" column="id"/>
+        <result property="nama" column="nama"/>
+    </resultMap>
+                 
+    <select id="selectAll" resultMap="result">
+        SELECT * FROM mata_anggaran;
+    </select>
+  
+    <select id="selectAllKategori" resultMap="resultKategori">
+        SELECT * FROM kategori_belanja;
+    </select>
+  
+  
+    <select id="selectMataAnggaran"
+            parameterType="int"
+            resultType="MataAnggaran">
+        SELECT * FROM mata_anggaran WHERE id=#{id}
+    </select>
+  
+    <select id="selectKategori"
+            parameterType="int"
+            resultType="KategoriBelanja">
+        SELECT * FROM kategori_belanja WHERE id=#{id}
+    </select>
+  
+    <insert id="insertMataAnggaran" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into mata_anggaran (nama,maksimal,kategori_belanja_id)
+        values (#{nama},#{maksimal},#{kategoriId})
+    </insert>
+    <update id="updateMataAnggaran">
+        UPDATE mata_anggaran SET
+        nama=#{nama},
+        maksimal=#{maksimal},
+        kategori_belanja_id=#{kategoriId}
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteMataAnggaran">
+        DELETE FROM mata_anggaran WHERE id=#{id}
+    </delete>
+</mapper>

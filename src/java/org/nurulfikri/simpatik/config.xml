@@ -8,6 +8,10 @@
     <typeAliases>
         <typeAlias alias="Propinsi" 
                    type="org.nurulfikri.simpatik.models.Propinsi"/> 
+    <typeAlias alias="MataAnggaran" 
+                   type="org.nurulfikri.simpatik.models.MataAnggaran"/> 
+    <typeAlias alias="KategoriBelanja" 
+                   type="org.nurulfikri.simpatik.models.KategoriBelanja"/> 
     </typeAliases>
  
     <environments default="development">
@@ -25,6 +29,8 @@
     
     <mappers>
        <mapper resource="org/nurulfikri/simpatik/mappers/PropinsiMapper.xml"/>
+       <mapper resource="org/nurulfikri/simpatik/mappers/MataAnggaranMapper.xml"/>
+       
     </mappers>
     
 </configuration>
