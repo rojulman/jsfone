@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:hf="http://highfaces.org"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <div>Grafik Column Mata Anggaran</div>
+        <ui:composition template="../layout/template2.xhtml">
+            <ui:define name="isi">
+        <h:form>
+            <hf:chart
+                type=""
+                title="Grafik Mata Anggaran" 
+                xaxisLabel="Pagu"
+                yaxisLabel="Nilai">
+
+                <hf:chartSerie colorByPoint="true"
+
+                               type="#{grafikBean.tipeGrafik}"
+                               name="MataAnggaran"
+                               value="#{grafikBean.list}"
+                               var="obj"
+                               point="#{obj.maksimal}"
+                               tickLabel="#{obj.nama}"/>
+
+            </hf:chart>
+
+       Pilihan Grafik :
+       <b:radiobutton value="#{grafikBean.tipeGrafik}">
+           <f:selectItems value="#{grafikBean.pilihanGrafik}"/>
+       </b:radiobutton>
+       <br/>
+       <b:commandButton value="draw"
+                        look="success"
+                        update="@form"
+                        onclick="ajax:grafikBean.redraw()"/>
+
+        </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

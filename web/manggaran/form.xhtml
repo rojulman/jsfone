@@ -40,15 +40,15 @@ and open the template in the editor.
                 </b:inputText>
                 <!--
                 <b:inputText label="Kategori ID:" 
-                             value="#{anggaran.mataAnggaran.kategoriId}"
+                             value="#{manggaran.mataAnggaran.kategoriId}"
                              labelStyle="width:80px;">
                 </b:inputText>
                 -->
                 <b:selectOneMenu
                     label="Kategori Belanja"
-                    value="#{anggaran.mataAnggaran.kategoriId}">
+                    value="#{manggaran.mataAnggaran.kategoriId}">
                     <f:selectItems
-                        value="#{anggaran.listKategori}"
+                        value="#{manggaran.allKategori}"
                         var="item"
                         itemLabel="#{item.nama}"
                         itemValue="#{item.id}"/>
@@ -60,7 +60,7 @@ and open the template in the editor.
             </h:panelGrid>
             <b:commandButton value="Simpan" 
                       look="success"
-                      action="#{anggaran.simpan()}"/>
+                      action="#{manggaran.simpan()}"/>
         </b:form>
             </ui:define>
         </ui:composition>
